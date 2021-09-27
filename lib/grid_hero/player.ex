@@ -121,7 +121,7 @@ defmodule GridHero.Player do
 
   @impl true
   def handle_info(:respawn, state) do
-    {:noreply, %{state | alive: true}}
+    {:noreply, %{state | alive: true, position: GridMap.get_spawn_position(state.map)}}
   end
 
   @impl true
