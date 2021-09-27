@@ -10,12 +10,11 @@ Tests can be run with `mix test`.
 
 The application can be run in development using `mix phx.server`.
 
-## Release
+## Deployment & release
 
-Use the `./build_release.sh` script to build the release.
+Use the `./build_release.sh` script to build a release. 
+However, the gigalixir deployment uses the buildpacks to build the release.
+See `.buildpacks` and `elixir_buildpack.config`.
 
-## Deployment
-
-Live demo at using Gigalixir at:
-
+Live demo using Gigalixir at:
 https://grid-hero.gigalixirapp.com/
