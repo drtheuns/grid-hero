@@ -1,0 +1,21 @@
+<%= form_for @conn, Routes.game_path(@conn, :create), fn f -> %>
+  <%= label f, :name, gettext("Game name:") %>
+  <%= text_input f, :name, value: gettext("%{name}'s game", name: @name) %>
+  <%= submit gettext("New game") %>
+<% end %>
+<table>
+  <thead>
+    <tr>
+      <th><%= gettext "Game name" %></th>
+      <th><%= gettext "Player count" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for game <- @games do %>
+    <tr>
+      <td><%= link game.name, to: Routes.game_play_path(@conn, :play, game.id) %></td>
+      <td><%= game.player_count %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

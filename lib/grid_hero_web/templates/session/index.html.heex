@@ -1,0 +1,8 @@
+<%= form_for @conn, Routes.session_path(@conn, :new_session), fn f -> %>
+  <%= if @error != nil do %>
+  <p class="error"><%= @error %></p>
+  <% end %>
+  <%= label f, :name, gettext("Name") %>
+  <%= text_input f, :name, min: 1, required: true %>
+  <%= submit gettext("Play") %>
+<% end %>

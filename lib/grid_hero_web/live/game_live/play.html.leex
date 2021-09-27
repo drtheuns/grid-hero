@@ -1,0 +1,33 @@
+<div class="container">
+	<p><%= gettext "Playing as:" %> <strong><%= @name %></strong></p>
+
+	<style>
+	.game-board {
+		--width: <%= @map.width %>;
+		--height: <%= @map.height %>;
+	}
+	</style>
+
+	<div class="game-board" phx-window-keyup="keyup" phx-throttle="100">
+		<%= for row <- Stream.chunk_every(@map.tiles, @map.width) do %>
+		<div class="row">
+			<%= for cell <- row do %>
+			<div class="cell <%= if cell == 0 do %>inaccessible<% end %>"></div>
+			<% end %>
+		</div>
+		<% end %>
+		<%= for player <- @players do %>
+		<div
+			class="player <%= if player.name == @name do %>current<% end %> <%= if not player.alive do %>dead<% end %>"
+			style="<%= player.grid_pos %>"
+		><span><%= player.name %></div>
+		<% end %>
+	</div>
+  <div>
+    <button phx-click="up" phx-trottle="100"><%= gettext "Up" %></button>
+    <button phx-click="down" phx-trottle="100"><%= gettext "Down" %></button>
+    <button phx-click="left" phx-trottle="100"><%= gettext "Left" %></button>
+    <button phx-click="right" phx-trottle="100"><%= gettext "Right" %></button>
+    <button phx-click="attack" phx-trottle="100"><%= gettext "Attack" %></button>
+  </div>
+</div>
