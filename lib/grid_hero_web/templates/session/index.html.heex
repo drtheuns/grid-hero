@@ -1,4 +1,7 @@
 <%= form_for @conn, Routes.session_path(@conn, :new_session), fn f -> %>
+  <%= if @next do %>
+    <%= hidden_input f, :next, value: @next %>
+  <% end %>
   <%= if @error != nil do %>
   <p class="error"><%= @error %></p>
   <% end %>

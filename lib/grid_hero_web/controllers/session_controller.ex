@@ -1,8 +1,8 @@
 defmodule GridHeroWeb.SessionController do
   use GridHeroWeb, :controller
 
-  def index(conn, _params) do
-    render(conn, "index.html", error: nil)
+  def index(conn, params) do
+    render(conn, "index.html", error: nil, next: Map.get(params, "next"))
   end
 
   def new_session(conn, params) do
@@ -17,10 +17,10 @@ defmodule GridHeroWeb.SessionController do
 
       _ ->
         # No protection against a name being already taken.
-        path = params["next"] || Routes.game_path(conn, :index)
+        path = Map.get(params, "next", Routes.game_path(conn, :index))
 
         conn
-        |> Plug.Conn.put_session(:name, name)
+        |> put_session(:name, name)
         |> redirect(to: path)
     end
   end
